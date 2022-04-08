@@ -1,0 +1,11 @@
+﻿@page
+@model PIA.DotNet.Interview.WebUI.Pages.ReadmeModel
+@{
+    ViewData["Title"] = "Readme page";
+}
+@using UI_BL
+@inject MarkdownService _markdownService
+
+<div>
+    @Html.Raw(@_markdownService.Parse(@"../../../PIA.DotNet.Interview/README.md"));
+</div>

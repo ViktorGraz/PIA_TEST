@@ -1,0 +1,42 @@
+﻿
+
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@using UI_BL
+@inject TaskService _taskService
+
+<div class="text-left">
+    <h1 class="alert-success text-center">Tasks</h1>
+    <h3>The tasks for this interview sample are as follows:</h3>
+
+    @foreach (var task in await _taskService.Get())
+    {
+        <div class="card mb-3 @(task.IsFinished ? "text-white bg-primary" : "bg-light")">
+            <div class="card-header">
+                Task @task.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@task.Title</h5>
+                <p class="card-text">@Html.Raw(task.Description)</p>
+                @if (!String.IsNullOrWhiteSpace(task.Example))
+                {
+                    <div class="card" style="width:400px">
+                        <img class="card-img-top" src="@Html.Raw(task.Example)" alt="Card image" style="width:100%">
+                        <div class="card-footer">
+                            <small class="text-muted">Example</small>
+                        </div>
+                    </div>
+                }
+
+                <a href="#" class="btn btn-primary mt-1">Erledigt</a>
+
+                @* to do task_2*@
+
+            </div>
+        </div>
+    }
+
+</div>
